@@ -37,20 +37,21 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
-class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-    pass
+# class ThreadedHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+#     pass
 
 Handler = RequestHandler
-httpd = ThreadedHTTPServer(("", PORT), Handler)
+httpd=socketserver.TCPServer(("", PORT), Handler)
+# httpd = ThreadedHTTPServer(("", PORT), Handler)
 
 print("serving at port", PORT)
 
-# Start a thread with the server -- that thread will then start one
-# more thread for each request
-server_thread = threading.Thread(target=httpd.serve_forever)
-# Exit the server thread when the main thread terminates
-server_thread.daemon = True
-server_thread.start()
+# # Start a thread with the server -- that thread will then start one
+# # more thread for each request
+# server_thread = threading.Thread(target=httpd.serve_forever)
+# # Exit the server thread when the main thread terminates
+# server_thread.daemon = True
+# server_thread.start()
 httpd.serve_forever()
 
 
