@@ -1,9 +1,9 @@
 import msgpack
 import json
 
-with open('data.msgpack', 'rb') as f:
+with open('DATA/data.msgpack', 'rb') as f:
     data = msgpack.unpack(f, raw=False)
-    with open('data.json','a') as jf:
-        jf.write(data)
+    with open('DATA/data.json','a') as jf:
+        json.dump(data, jf)
 
-print(data)
+# print(data)
